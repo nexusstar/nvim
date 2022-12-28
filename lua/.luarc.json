@@ -1,0 +1,33 @@
+{
+    "$schema": "https://raw.githubusercontent.com/sumneko/vscode-lua/master/setting/schema.json",
+    "Lua.workspace.library": [
+        "/Users/petar.nikov/.local/share/nvim/site/pack/packer/start/neodev.nvim/types/nightly",
+        "/Users/petar.nikov/neovim/share/nvim/runtime",
+        "/Users/petar.nikov/.local/share/nvim/site/pack/packer/opt/nvim-treesitter-textobjects",
+        "/Users/petar.nikov/.local/share/nvim/site/pack/packer/opt/telescope-fzf-native.nvim",
+        "/Users/petar.nikov/.local/share/nvim/site/pack/packer/start/cmp-nvim-lsp",
+        "/Users/petar.nikov/.local/share/nvim/site/pack/packer/start/cmp_luasnip",
+        "/Users/petar.nikov/.local/share/nvim/site/pack/packer/start/Comment.nvim",
+        "/Users/petar.nikov/.local/share/nvim/site/pack/packer/start/fidget.nvim",
+        "/Users/petar.nikov/.local/share/nvim/site/pack/packer/start/gitsigns.nvim",
+        "/Users/petar.nikov/.local/share/nvim/site/pack/packer/start/harpoon",
+        "/Users/petar.nikov/.local/share/nvim/site/pack/packer/start/indent-blankline.nvim",
+        "/Users/petar.nikov/.local/share/nvim/site/pack/packer/start/lsp-zero.nvim",
+        "/Users/petar.nikov/.local/share/nvim/site/pack/packer/start/lualine.nvim",
+        "/Users/petar.nikov/.local/share/nvim/site/pack/packer/start/LuaSnip",
+        "/Users/petar.nikov/.local/share/nvim/site/pack/packer/start/mason-lspconfig.nvim",
+        "/Users/petar.nikov/.local/share/nvim/site/pack/packer/start/mason.nvim",
+        "/Users/petar.nikov/.local/share/nvim/site/pack/packer/start/neodev.nvim",
+        "/Users/petar.nikov/.local/share/nvim/site/pack/packer/start/nvim-cmp",
+        "/Users/petar.nikov/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
+        "/Users/petar.nikov/.local/share/nvim/site/pack/packer/start/nvim-tree.lua",
+        "/Users/petar.nikov/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
+        "/Users/petar.nikov/.local/share/nvim/site/pack/packer/start/nvim-web-devicons",
+        "/Users/petar.nikov/.local/share/nvim/site/pack/packer/start/onedark.nvim",
+        "/Users/petar.nikov/.local/share/nvim/site/pack/packer/start/packer.nvim",
+        "/Users/petar.nikov/.local/share/nvim/site/pack/packer/start/plenary.nvim",
+        "/Users/petar.nikov/.local/share/nvim/site/pack/packer/start/telescope.nvim",
+        "/Users/petar.nikov/.local/share/nvim/site/pack/packer/start/trouble.nvim",
+        "${3rd}/luassert/library"
+    ]
+}
