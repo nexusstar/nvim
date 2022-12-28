@@ -122,7 +122,7 @@ end
 -- Automatically source and re-compile packer whenever you save this init.lua
 local packer_group = vim.api.nvim_create_augroup('Packer', { clear = true })
 vim.api.nvim_create_autocmd('BufWritePost', {
-  command = 'source <afile> | PackerCompile',
+  command = 'source <afile> | silent! LspStop | silent! LspStart | PackerCompile',
   group = packer_group,
   pattern = vim.fn.expand '$MYVIMRC',
 })
@@ -172,8 +172,8 @@ vim.wo.number = true
 -- Enable relative numbers
 vim.wo.relativenumber = true
 
--- Enable mouse mode
-vim.o.mouse = 'a'
+-- Enable mouse mode only on command mode
+vim.o.mouse = 'c'
 
 -- Enable break indent
 vim.o.breakindent = true
@@ -203,6 +203,12 @@ vim.o.completeopt = 'menuone,noselect'
 vim.o.splitright = true
 vim.o.splitbelow = true
 
+-- Disable swap files
+vim.o.swapfile = false
+
+-- Disable backup files
+vim.o.backup = false
+
 -- [[ Basic Keymaps ]]
 -- Set <space> as the leader key
 -- See `:help mapleader`
@@ -217,6 +223,9 @@ vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 -- Remap for dealing with word wrap
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+
+-- Don't replace register on paste in visual mode
+vim.keymap.set('v', 'p', '"_dP', { silent = true })
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
