@@ -22,6 +22,10 @@ require('packer').startup(function(use)
       -- Useful status updates for LSP
       'j-hui/fidget.nvim',
 
+      --Bridge for null-ls and mason
+      "jose-elias-alvarez/null-ls.nvim",
+      "jayp0521/mason-null-ls.nvim",
+
       -- Additional lua configuration, makes nvim stuff amazing
       'folke/neodev.nvim',
     },
@@ -173,7 +177,7 @@ vim.wo.number = true
 vim.wo.relativenumber = true
 
 -- Enable mouse mode only on command mode
-vim.o.mouse = 'c'
+vim.o.mouse = 'a'
 
 -- Enable break indent
 vim.o.breakindent = true
@@ -356,8 +360,8 @@ require('nvim-tree').setup {
     },
   },
 }
-vim.keymap.set('n', '<leader>p', '<cmd>NvimTreeToggle<cr>', { noremap = true, silent = true })
-vim.keymap.set('v', '<leader>p', '<cmd>NvimTreeToggle<cr>', { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>p', '<cmd>NvimTreeFindFileToggle<cr>', { noremap = true, silent = true })
+vim.keymap.set('v', '<leader>p', '<cmd>NvimTreeFindFileToggle<cr>', { noremap = true, silent = true })
 
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
@@ -527,6 +531,17 @@ local servers = {
 
   sumneko_lua = {
     Lua = {
+      runtime = {
+        -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+        version = "LuaJIT",
+        -- Setup your lua path
+        path = vim.split(package.path, ";"),
+      },
+      diagnostics = {
+        -- Get the language server to recognize the `vim` global
+        globals = { "vim", "describe", "it", "before_each", "after_each", "packer_plugins", "MiniTest" },
+        -- disable = { "lowercase-global", "undefined-global", "unused-local", "unused-vararg", "trailing-space" },
+      },
       workspace = { checkThirdParty = false },
       telemetry = { enable = false },
     },
@@ -570,7 +585,11 @@ mason_lspconfig.setup_handlers {
 -- Turn on lsp status information
 require('fidget').setup()
 
--- File tree setup
+-- Setup null-ls
+require('mason-null-ls').setup {
+  automatic_setup = true,
+}
+require('mason-null-ls').setup_handlers()
 
 -- nvim-cmp setup
 local cmp = require 'cmp'
