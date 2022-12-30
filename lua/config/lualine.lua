@@ -1,11 +1,11 @@
 local M = {}
-local kind = require "config.icons"
+local icons = require "config.icons"
 local hide_in_width = function()
 	return vim.fn.winwidth(0) > 80
 end
 
 local function clock()
-  return kind.icons.clock .. os.date "%H:%M"
+  return icons.clock .. os.date "%H:%M"
 end
 
 local diagnostics = {
