@@ -250,6 +250,7 @@ local luaConfig = require('config.lualine')
 require('lualine').setup(luaConfig)
 
 -- Setup bufferline
+-- see `:help bufferline`
 require("bufferline").setup{
   options = {
     mode = "buffers", -- tabs or buffers
@@ -282,6 +283,13 @@ require("bufferline").setup{
     end,
   },
 }
+
+-- Buffers keymaps
+-- -- Move to previous/next
+vim.keymap.set('n', '<S-j>', '<cmd>BufferLineCycleNext<CR>', { silent = true })
+vim.keymap.set('n', '<S-h>', '<cmd>BufferLineCyclePrev<CR>', { silent = true })
+vim.keymap.set('n', '<S-p>', '<cmd>BufferLinePick<CR>', { silent = true })
+vim.keymap.set('n', '<leader>bc', '<cmd>%bd|e#|bd#<CR>', { silent = true })
 
 -- Enable Comment.nvim
 require('Comment').setup()
