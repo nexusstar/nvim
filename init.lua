@@ -78,7 +78,7 @@ require('packer').startup(function(use)
       'nvim-tree/nvim-web-devicons', -- optional, for file icons
     }
   }
-  
+
   -- Bufferline
   use {'akinsho/bufferline.nvim', tag = "v3.*", requires = 'nvim-tree/nvim-web-devicons'}
 
@@ -290,6 +290,7 @@ vim.keymap.set('n', '<S-j>', '<cmd>BufferLineCycleNext<CR>', { silent = true })
 vim.keymap.set('n', '<S-h>', '<cmd>BufferLineCyclePrev<CR>', { silent = true })
 vim.keymap.set('n', '<S-p>', '<cmd>BufferLinePick<CR>', { silent = true })
 vim.keymap.set('n', '<leader>bc', '<cmd>%bd|e#|bd#<CR>', { silent = true })
+vim.keymap.set('n', '<leader>bq', '<cmd>bn|bd#<CR>', { silent = true })
 
 -- Enable Comment.nvim
 require('Comment').setup()
@@ -396,11 +397,41 @@ vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { de
 -- see ':help nvim-tree'
 require('nvim-tree').setup {
   renderer = {
+    indent_markers = {
+      enable = true,
+      icons = {
+        corner = "└ ",
+        edge = "│ ",
+        none = "  ",
+      },
+    },
     highlight_git = true,
     icons = {
       show = {
         git = true,
       },
+    },
+    special_files = {
+      "README.md",
+      "LICENSE",
+      "Cargo.toml",
+      "Makefile",
+      "package.json",
+      "package-lock.json",
+      "go.mod",
+      "go.sum",
+    }
+  },
+  actions = {
+    use_system_clipboard = false,
+    change_dir = {
+      enable = false,
+      global = false,
+      restrict_above_cwd = false,
+    },
+    open_file = {
+      quit_on_open = true,
+      resize_window = true,
     },
   },
 }
@@ -630,11 +661,25 @@ mason_lspconfig.setup_handlers {
 require('fidget').setup()
 
 -- Setup null-ls
-require('mason-null-ls').setup {
-  automatic_setup = true,
-}
+local null_ls = require("null-ls")
+null_ls.setup({
+  sources = {
+    null_ls.builtins.formatting.prettier.with({
+      extra_filetypes = { "toml" },
+    }),
+  },
+  on_attach = function(_, bufnr)
+    vim.keymap.set("n", "gq",
+      [[<cmd>lua vim.lsp.buf.format({async=true,name="null-ls"})<CR>]],
+      { silent = true, buffer = bufnr, desc = "format document [null-ls]" })
+  end
+})
 
-require('mason-null-ls').setup_handlers()
+require('mason-null-ls').setup {
+  ensure_installed = nil,
+  automatic_installation = true,
+  automatic_setup = false,
+}
 
 -- nvim-cmp setup
 local cmp = require 'cmp'
