@@ -169,7 +169,8 @@ end
 vim.o.clipboard = 'unnamedplus'
 
 -- Set highlight on search
-vim.o.hlsearch = false
+vim.o.hlsearch = true
+-- Show matching while type search pattern
 vim.o.incsearch = true
 
 -- Make line numbers default
@@ -183,6 +184,12 @@ vim.o.mouse = 'a'
 
 -- Enable break indent
 vim.o.breakindent = true
+
+-- Disable swap files
+vim.o.swapfile = false
+
+-- Disable backup files
+vim.o.backup = false
 
 -- Save undo history
 vim.o.undofile = true
@@ -209,11 +216,12 @@ vim.o.completeopt = 'menuone,noselect'
 vim.o.splitright = true
 vim.o.splitbelow = true
 
--- Disable swap files
-vim.o.swapfile = false
+-- Set grep to use rg
+vim.o.grepprg = "rg --vimgrep --no-heading --smart-case"
+vim.o.grepformat = "%f:%l:%c:%m,%f:%l:%m"
 
--- Disable backup files
-vim.o.backup = false
+vim.opt.formatoptions:remove "t"
+vim.opt.formatoptions:remove "o"
 
 -- [[ Basic Keymaps ]]
 -- Set <space> as the leader key
@@ -232,6 +240,10 @@ vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = tr
 
 -- Don't replace register on paste in visual mode
 vim.keymap.set('v', 'p', '"_dP', { silent = true })
+
+-- Clear search highlighting
+vim.keymap.set('n', '<Leader>h', '<cmd>nohlsearch<CR>', { silent = true })
+vim.keymap.set('v', '<Leader>h', '<cmd>nohlsearch<CR>', { silent = true })
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
@@ -638,7 +650,17 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
 -- Setup mason so it can manage external tooling
-require('mason').setup()
+require('mason').setup({
+    max_concurrent_installers = 10,
+    log_level = vim.log.levels.DEBUG,
+    ui = {
+        icons = {
+            package_installed = "",
+            package_pending = "",
+            package_uninstalled = "",
+        },
+    },
+})
 
 -- Ensure the servers above are installed
 local mason_lspconfig = require 'mason-lspconfig'
