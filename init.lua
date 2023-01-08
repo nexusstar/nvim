@@ -183,6 +183,7 @@ vim.wo.relativenumber = true
 vim.o.mouse = 'a'
 
 -- Enable break indent
+-- start wrapped lines indented
 vim.o.breakindent = true
 
 -- Disable swap files
@@ -216,12 +217,29 @@ vim.o.completeopt = 'menuone,noselect'
 vim.o.splitright = true
 vim.o.splitbelow = true
 
+-- Use shiftwidths at left margin, tabstops everywhere else
+vim.o.smarttab = true
+
+--  use 'magic' chars in search pattern
+vim.o.magic = true
+
 -- Set grep to use rg
 vim.o.grepprg = "rg --vimgrep --no-heading --smart-case"
 vim.o.grepformat = "%f:%l:%c:%m,%f:%l:%m"
-
-vim.opt.formatoptions:remove "t"
-vim.opt.formatoptions:remove "o"
+vim.opt.formatoptions = 'cqrnj'
+-- - "a" -- Auto formatting is BAD.
+-- - "t" -- Don't auto format my code. I got linters for that.
+-- + "c" -- In general, I like it when comments respect textwidth
+-- + "q" -- Allow formatting comments w/ gq
+-- - "o" -- O and o, don't continue comments
+-- + "r" -- But do continue when pressing enter.
+-- + "n" -- Indent past the formatlistpat, not underneath it.
+-- + "j" -- Auto-remove comments if possible.
+-- - "2" -- I'm not in gradeschool anymore
+vim.opt.formatoptions:remove "a" -- Don't auto format.
+vim.opt.formatoptions:remove "t" -- Don't auto format the code. We got linters for that.
+vim.opt.formatoptions:remove "o" -- Don't add comments on new line with o
+vim.opt.formatoptions:remove "2"
 
 -- [[ Basic Keymaps ]]
 -- Set <space> as the leader key
