@@ -389,7 +389,11 @@ vim.keymap.set('n', '<leader>gR', ':Gitsigns reset_buffer<CR>', { silent = true 
 vim.keymap.set('n', '<leader>gj', ':Gitsigns next_hunk<CR>', { silent = true })
 vim.keymap.set('n', '<leader>gk', ':Gitsigns prev_hunk<CR>', { silent = true })
 vim.keymap.set('n', '<leader>gd', ':Gitsigns diffthis HEAD<CR>', { silent = true })
-vim.keymap.set('n', '<leader>go', ':Telescope git_status<CR>', { silent = true })
+vim.keymap.set('n', '<leader>gs', function()
+  require('telescope.builtin').git_status(require('telescope.themes').get_dropdown {
+    winblend = 10
+  })
+end, { silent = true, desc = '[G]it [S]tatus' })
 vim.keymap.set('n', '<leader>gb', ':Telescope git_branches<CR>', { silent = true })
 vim.keymap.set('n', '<leader>gc', ':Telescope git_commits<CR>', { silent = true })
 
