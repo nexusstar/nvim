@@ -241,6 +241,9 @@ vim.opt.formatoptions:remove "t" -- Don't auto format the code. We got linters f
 vim.opt.formatoptions:remove "o" -- Don't add comments on new line with o
 vim.opt.formatoptions:remove "2"
 
+-- shorten messages
+vim.o.shortmess = vim.o.shortmess .. 'c'
+
 -- [[ Basic Keymaps ]]
 -- Set <space> as the leader key
 -- See `:help mapleader`
