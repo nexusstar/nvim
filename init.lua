@@ -67,6 +67,7 @@ require('packer').startup(function(use)
   use { 'nvim-telescope/telescope.nvim', branch = '0.1.x', requires = { 'nvim-lua/plenary.nvim' } }
   use { 'theprimeagen/harpoon' }
   use { 'mbbill/undotree' }
+  use { 'smartpde/telescope-recent-files' }
 
   -- Fuzzy Finder Algorithm which requires local dependencies to be built. Only load if `make` is available
   use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', cond = vim.fn.executable 'make' == 1 }
@@ -414,10 +415,10 @@ require('telescope').setup {
 pcall(require('telescope').load_extension, 'fzf')
 
 -- See `:help telescope.builtin`
-vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles, { desc = '[?] Find recently opened files' })
 vim.keymap.set('n', '<leader><space>', function()
   -- You can pass additional configuration to telescope to change theme, layout, etc.
   require('telescope.builtin').buffers(require('telescope.themes').get_dropdown {
+    prompt_title = 'Buffers',
     previewer = false
   })
 end,
@@ -425,6 +426,7 @@ end,
 vim.keymap.set('n', '<leader>/', function()
   -- You can pass additional configuration to telescope to change theme, layout, etc.
   require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
+    prompt_title = vim.fn.expand('%'),
     winblend = 10,
     previewer = false,
   })
@@ -435,11 +437,12 @@ vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc
 vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
 vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
-vim.keymap.set('n', '<leader>or', function()
-  require('telescope.builtin').oldfiles(require('telescope.themes').get_dropdown{
-    winblend = 10
+vim.keymap.set('n', '<leader>f', function()
+  require('telescope').extensions.recent_files.pick(require('telescope.themes').get_dropdown {
+    winblend = 10,
+    previewer = false,
   })
-end, { desc = '[O]pen [R]ecent files' })
+end, { desc = 'Recent [F]iles' })
 
 -- File tree opened
 -- see ':help nvim-tree'
