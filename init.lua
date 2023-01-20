@@ -180,7 +180,7 @@ vim.wo.number = true
 -- Enable relative numbers
 vim.wo.relativenumber = true
 
--- Enable mouse mode only on command mode
+-- Enable mouse mode
 vim.o.mouse = 'a'
 
 -- Enable break indent
@@ -195,6 +195,9 @@ vim.o.backup = false
 
 -- Save undo history
 vim.o.undofile = true
+
+-- autoread file if changed outside neovim
+vim.o.autoread = true
 
 -- Case insensitive searching UNLESS /C or capital in search
 vim.o.ignorecase = true
