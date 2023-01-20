@@ -271,6 +271,10 @@ vim.keymap.set('v', 'p', '"_dP', { silent = true })
 vim.keymap.set('n', '<Leader>h', '<cmd>nohlsearch<CR>', { silent = true })
 vim.keymap.set('v', '<Leader>h', '<cmd>nohlsearch<CR>', { silent = true })
 
+-- Keep matches centered on the screen while searching
+vim.keymap.set('n', 'n', 'nzzzv', { silent = true })
+vim.keymap.set('n', 'N', 'Nzzzv', { silent = true })
+
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
 local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
