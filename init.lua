@@ -160,9 +160,6 @@ for _, plugin in pairs(disabled_built_ins) do
   vim.g["loaded_" .. plugin] = 1
 end
 
--- vim.g.loaded_netrw = 1
--- vim.g.loaded_netrwPlugin = 1
-
 -- [[ Setting options ]]
 -- See `:help vim.o`
 
@@ -666,23 +663,23 @@ local servers = {
     },
   },
 
-  sumneko_lua = {
-    Lua = {
-      runtime = {
-        -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-        version = "LuaJIT",
-        -- Setup your lua path
-        path = vim.split(package.path, ";"),
-      },
-      diagnostics = {
-        -- Get the language server to recognize the `vim` global
-        globals = { "vim", "describe", "it", "before_each", "after_each", "packer_plugins", "MiniTest" },
-        -- disable = { "lowercase-global", "undefined-global", "unused-local", "unused-vararg", "trailing-space" },
-      },
-      workspace = { checkThirdParty = false },
-      telemetry = { enable = false },
-    },
-  },
+  -- sumneko_lua = {
+  --   Lua = {
+  --     runtime = {
+  --       -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+  --       version = "LuaJIT",
+  --       -- Setup your lua path
+  --       path = vim.split(package.path, ";"),
+  --     },
+  --     diagnostics = {
+  --       -- Get the language server to recognize the `vim` global
+  --       globals = { "vim", "describe", "it", "before_each", "after_each", "packer_plugins", "MiniTest" },
+  --       -- disable = { "lowercase-global", "undefined-global", "unused-local", "unused-vararg", "trailing-space" },
+  --     },
+  --     workspace = { checkThirdParty = false },
+  --     telemetry = { enable = false },
+  --   },
+  -- },
 }
 
 -- Setup neovim lua configuration
