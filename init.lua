@@ -21,6 +21,7 @@ vim.opt.rtp:prepend(lazypath)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
+-- Load plugins
 require('lazy').setup('plugins')
 
 -- Disable some builtin vim plugins
@@ -334,51 +335,6 @@ vim.keymap.set('n', '<leader>f', function()
     previewer = false,
   })
 end, { desc = 'Recent [F]iles' })
-
--- File tree opened
--- see ':help nvim-tree'
-require('nvim-tree').setup {
-  renderer = {
-    indent_markers = {
-      enable = true,
-      icons = {
-        corner = "└ ",
-        edge = "│ ",
-        none = "  ",
-      },
-    },
-    highlight_git = true,
-    icons = {
-      show = {
-        git = true,
-      },
-    },
-    special_files = {
-      "README.md",
-      "LICENSE",
-      "Cargo.toml",
-      "Makefile",
-      "package.json",
-      "package-lock.json",
-      "go.mod",
-      "go.sum",
-    }
-  },
-  actions = {
-    use_system_clipboard = false,
-    change_dir = {
-      enable = false,
-      global = false,
-      restrict_above_cwd = false,
-    },
-    open_file = {
-      quit_on_open = true,
-      resize_window = true,
-    },
-  },
-}
-vim.keymap.set('n', '<leader>p', '<cmd>NvimTreeFindFileToggle<cr>', { noremap = true, silent = true })
-vim.keymap.set('v', '<leader>p', '<cmd>NvimTreeFindFileToggle<cr>', { noremap = true, silent = true })
 
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
