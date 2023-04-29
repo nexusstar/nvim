@@ -102,6 +102,10 @@ require('packer').startup(function(use)
     { "williamboman/nvim-dap-vscode-js", branch = "feat/debug-cmd" },
     "jbyuki/one-small-step-for-vimkind",
   }
+
+  -- color convert_range_encoding
+  use 'NTBBloodbath/color-converter.nvim'
+
   -- Add custom plugins to packer from ~/.config/nvim/lua/custom/plugins.lua
   local has_plugins, plugins = pcall(require, 'custom.plugins')
   if has_plugins then
@@ -228,14 +232,14 @@ vim.o.magic = true
 vim.o.grepprg = "rg --vimgrep --no-heading --smart-case"
 vim.o.grepformat = "%f:%l:%c:%m,%f:%l:%m"
 vim.opt.formatoptions = 'cqrnj'
--- - "a" -- Auto formatting is BAD.
--- - "t" -- Don't auto format my code. I got linters for that.
 -- + "c" -- In general, I like it when comments respect textwidth
 -- + "q" -- Allow formatting comments w/ gq
--- - "o" -- O and o, don't continue comments
 -- + "r" -- But do continue when pressing enter.
 -- + "n" -- Indent past the formatlistpat, not underneath it.
 -- + "j" -- Auto-remove comments if possible.
+-- - "a" -- Auto formatting is BAD.
+-- - "t" -- Don't auto format my code. I got linters for that.
+-- - "o" -- O and o, don't continue comments
 -- - "2" -- I'm not in gradeschool anymore
 vim.opt.formatoptions:remove "a" -- Don't auto format.
 vim.opt.formatoptions:remove "t" -- Don't auto format the code. We got linters for that.
@@ -689,8 +693,16 @@ require('neodev').setup()
 -- setup trouble.nvim
 require('trouble').setup({
   use_diagnostic_signs = true,
+  icons = {
+    error = "",
+    warning = "",
+    hint = "",
+    information = "",
+    other = "﫠",
+  },
 })
-vim.keymap.set('n', '<leader>xx', ':TroubleToggle<CR>', { silent = true })
+
+vim.keymap.set('n', '<leader>xx', '<cmd>TroubleToggle<CR>', { silent = true, noremap = true })
 
 -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -745,7 +757,6 @@ null_ls.setup({
 })
 
 require('mason-null-ls').setup {
-  ensure_installed = nil,
   automatic_installation = true,
   automatic_setup = false,
 }
