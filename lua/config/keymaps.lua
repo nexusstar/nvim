@@ -4,7 +4,6 @@ local Util = require("util")
 
 local function map(mode, lhs, rhs, opts)
   local keys = require("lazy.core.handler").handlers.keys
-  ---@cast keys LazyKeysHandler
   -- do not create the keymap if a lazy keys handler exists
   if not keys.active[keys.parse({ lhs, mode = mode }).id] then
     opts = opts or {}
@@ -12,6 +11,9 @@ local function map(mode, lhs, rhs, opts)
     vim.keymap.set(mode, lhs, rhs, opts)
   end
 end
+-- Set upercase on  insert mode with <ctr> + upercase
+-- absolutly love This
+map("i", "<C-u>", "<Esc>gUiw`]a", { desc = "To uppercase" })
 
 -- better up/down
 map("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })

@@ -18,6 +18,15 @@ vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 require("lazy").setup({
   spec = {
     { import = "plugins" },
+    { import = "plugins.extras.coding.copilot" },
+    { import = "plugins.extras.lang.json" },
+    { import = "plugins.extras.lang.typescript" },
+    { import = "plugins.extras.formatting.prettier" },
+    { import = "plugins.extras.linting.eslint" },
+    { import = "plugins.extras.util.project" },
+    { import = "plugins.extras.dap.core" },
+    { import = "plugins.extras.dap.core" },
+    { import = "plugins.extras.dap.nlua" },
   },
   defaults = {
     lazy = true,

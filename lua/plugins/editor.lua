@@ -21,7 +21,7 @@ return {
         end,
         desc = "Explorer NeoTree (cwd)",
       },
-      { "<leader>p", "<leader>fe", desc = "Explorer NeoTree (root dir)", remap = true },
+      { "<leader>e", "<leader>fe", desc = "Explorer NeoTree (root dir)", remap = true },
       { "<leader>E", "<leader>fE", desc = "Explorer NeoTree (cwd)", remap = true },
     },
     deactivate = function()
@@ -299,6 +299,7 @@ return {
         map("n", "<leader>ghd", gs.diffthis, "Diff This")
         map("n", "<leader>ghD", function() gs.diffthis("~") end, "Diff This ~")
         map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", "GitSigns Select Hunk")
+        map({ "n", "v" }, "<leader>gl", gs.blame_line, "GitSigns Blame Line")
       end,
     },
   },

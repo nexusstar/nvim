@@ -51,6 +51,7 @@ return {
         "regex",
         "tsx",
         "typescript",
+        "terraform",
         "vim",
         "vimdoc",
         "yaml",
