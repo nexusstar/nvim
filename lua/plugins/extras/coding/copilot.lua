@@ -1,5 +1,4 @@
 return {
-
   -- copilot
   {
     "zbirenbaum/copilot.lua",
@@ -60,7 +59,6 @@ return {
         end,
       },
     },
-    ---@param opts cmp.ConfigSchema
     opts = function(_, opts)
       local cmp = require("cmp")
 
@@ -71,7 +69,6 @@ return {
         select = true,
         behavior = cmp.ConfirmBehavior.Replace,
       })
-
       opts.mapping = vim.tbl_extend("force", opts.mapping, {
         ["<CR>"] = function(...)
           local entry = cmp.get_selected_entry()
